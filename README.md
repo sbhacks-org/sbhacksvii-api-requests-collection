@@ -1,6 +1,6 @@
 # SB Hacks VII API Requests Collection
 
-**Workshop date:**  January 16th, 2020 @ 3pm PST
+**Workshop date:**  January 16th, 2020 @ 3pm PST  
 **Hosted by:**  Jayleen Li and Daniel Guo from SB Hacks
 
 This repo is meant to serve as a easy plug-n-play for API requests in popular hackathon languages like Python, JavaScript, and Node.js. Take the examples you see and copy paste them as you see fit! 
