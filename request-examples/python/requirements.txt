@@ -1,0 +1,4 @@
+# put all dependencies here
+# pip install -r requirements.txt will install every package in this file and also THEIR dependencies
+Flask==1.1.2
+requests==2.22.0
