@@ -28,7 +28,7 @@ You may need to `npm install axios`
 Open 'index.html' file in the browser of your choice. You can do this by right-clicking on the file and clicking "Open with"
 ![Open with browser](https://imgur.com/v8e326H.png)
 
-You should see your code in the browser now. Right-click and click "Inspect"
+You should see your code in the browser now. Right-click and click "Inspect". Then click the "Console" tab in the dev tools. This screenshot is in a chrome browser, and may look different for other browsers.
 ![You should see something like this](https://i.imgur.com/5wu5gYb.png)
 
 ### Python

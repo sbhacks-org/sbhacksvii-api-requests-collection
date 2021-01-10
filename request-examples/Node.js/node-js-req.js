@@ -38,3 +38,7 @@ req.on('error', error => {
 
 req.end()
 
+/* 
+For most requests, especailly those with some kind of authentication, the API has a library wrapper that will make your life a lot easier 
+Yelp example: https://github.com/Yelp/yelp-fusion/blob/master/fusion/node/sample.js
+*/
