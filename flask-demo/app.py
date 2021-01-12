@@ -53,9 +53,9 @@ def demo_API_page():
             # send request to some URL and it returns a response object which has meta and regular data in it
             response = requests.get('https://catfact.ninja/fact')
             if response.status_code == 200:
-                return render_template('index.html', response_text=response.json()['fact'])
+                return render_template('page.html', response_text=response.json()['fact'])
             else:
-                return render_template('index.html', response_text="cat api call failed")
+                return render_template('page.html', response_text="cat api call failed")
         # if the user didn't input cat but still input something, we query yelp for it
         else:
             # yelp requires API keys
@@ -82,9 +82,9 @@ def demo_API_page():
             response = requests.request('GET', URL, headers=headers, params=url_params)
             if response.status_code == 200 and len(response.json()['businesses']) > 0:
                 business = response.json()['businesses'][0]
-                return render_template('index.html', term=request.form['key'], restaurant_name=business['name'], restaurant_url=business['url'], restaurant_img_url=business['image_url'], restaurant_rating=str(business['rating']))
+                return render_template('page.html', term=request.form['key'], restaurant_name=business['name'], restaurant_url=business['url'], restaurant_img_url=business['image_url'], restaurant_rating=str(business['rating']))
             else:
-                return render_template('index.html', response_text="yelp: either API call failed or no businesses matching the searched term")
+                return render_template('page.html', response_text="yelp: either API call failed or no businesses matching the searched term")
 
     # if no request from our form, then show the form
-    return render_template('index.html')
+    return render_template('page.html')
