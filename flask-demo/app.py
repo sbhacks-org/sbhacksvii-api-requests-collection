@@ -4,17 +4,19 @@ This program shows you how to query an API in Python.
 You must have the Python requests library, which you can install via:
 pip install requests
 
-You'll also need Flask
+You'll also need Flask (you might have to use pip3)
 pip install flask
 
-maybe use pip3
+to run this app
+    export FLASK_APP=app.py
+    flask run
 
 Note: we put all our code into one file for this demo, but in your project you will probably want to organize things
 into folders and files in order to separate the code into chunks that make sense. ex. the code for backend logic
 probably should not be in the same file as the html/css. see https://flask.palletsprojects.com/en/1.1.x/tutorial/layout/
 """
 
-from flask import Flask, request # request for Flask, not the API
+from flask import Flask, request, render_template # request for Flask, not the API
 import json
 import pprint
 import requests
@@ -22,9 +24,7 @@ import sys
 import urllib
 
 # create Flask app
-# to run this app
-#   export FLASK_APP=app.py
-#   flask run
+
 app = Flask(__name__)
 
 # set up requests parameters
@@ -34,7 +34,7 @@ app = Flask(__name__)
 @app.route('/')
 def demo_front_page():
     # return a HTML page
-    # i'm lazy so i'm just returning a string, but you should use flask's render_template to return an HTML
+    # i'm just returning a string, but you should use flask's render_template to return an HTML (example below)
     return '''
         This is the front page of our app. Click below to go to the API page
         <form action="http://localhost:5000/API_page">
@@ -53,15 +53,9 @@ def demo_API_page():
             # send request to some URL and it returns a response object which has meta and regular data in it
             response = requests.get('https://catfact.ninja/fact')
             if response.status_code == 200:
-                return f'''cool fact: {response.json()['fact']}\n
-                <form action="http://localhost:5000/API_page">
-                <input type="submit" value="Go to API page" />
-                </form>'''
+                return render_template('index.html', response_text=response.json()['fact'])
             else:
-                return '''cat api call failed\n
-                <form action="http://localhost:5000/API_page">
-                <input type="submit" value="Go to API page" />
-                </form>'''
+                return render_template('index.html', response_text="cat api call failed")
         # if the user didn't input cat but still input something, we query yelp for it
         else:
             # yelp requires API keys
@@ -88,24 +82,9 @@ def demo_API_page():
             response = requests.request('GET', URL, headers=headers, params=url_params)
             if response.status_code == 200 and len(response.json()['businesses']) > 0:
                 business = response.json()['businesses'][0]
-                return f'''top result is {business['name']}\n
-                yelp link: {business['url']}\n
-                rating: {business['rating']}\n
-                <form action="http://localhost:5000/API_page">
-                <input type="submit" value="Go to API page" />
-                </form>'''
+                return render_template('index.html', term=request.form['key'], restaurant_name=business['name'], restaurant_url=business['url'], restaurant_img_url=business['image_url'], restaurant_rating=str(business['rating']))
             else:
-                return '''yelp: either API call failed or no businesses matching the searched term\n
-                <form action="http://localhost:5000/API_page">
-                <input type="submit" value="Go to API page" />
-                </form>'''
+                return render_template('index.html', response_text="yelp: either API call failed or no businesses matching the searched term")
 
     # if no request from our form, then show the form
-    return '''
-            Input 'cat' for a cat fact. otherwise queries yelp businesses in IV
-            <form method="POST">
-            input key: <input type="text" name="key"><br>
-            <input type="submit" value="Submit"><br>
-            </form>'''
-
-
+    return render_template('index.html')

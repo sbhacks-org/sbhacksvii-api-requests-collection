@@ -1,0 +1,34 @@
+<!doctype html>
+<title>Flask API App</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<nav>
+  <h1 class="text-center">Flask API App</h1>
+</nav>
+<section class="content">
+  <header>
+  </header>
+  <body>
+    <div class="container text-center">
+      Input 'cat' for a cat fact. otherwise queries yelp businesses in IV
+      <form method="POST">
+      input key: <input type="text" name="key">
+      <input class="btn btn-primary" type="submit" value="Submit" style="margin: 16px;"><br>
+      </form>
+      {% if restaurant_name %}
+      <div class="card border-secondary mb-3" style="width: 18rem;">
+        <img class="card-img-top" src={{ restaurant_img_url }} alt="Card image cap">
+        <h5 class="card-title">{{ restaurant_name }}</h5>
+        <div class="card-body">
+          <p class="card-text"> The top result for the term '{{term}}' in Isla Vista!</p>
+        </div>
+        <a href={{restaurant_url}} class="btn btn-primary" style="background-color:red; margin:24px;">Yelp</a>
+        <div class="card-footer">
+          <small class="text-muted">Rating:{{ restaurant_rating }}/5.0 stars</small>
+        </div>
+      </div>
+      {% else %}
+        <p>{{ response_text }}</p>
+      {% endif %}
+    </div>
+  </body>
+</section>
