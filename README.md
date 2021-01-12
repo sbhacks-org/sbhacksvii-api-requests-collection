@@ -17,7 +17,6 @@ This workshop is intended for those with some coding knowledge and some understa
 
 ## How to run the examples
 
-
 ### Node.js
 cd into the folder where the file is and do this in your terminal:
 You may need to `npm install axios`
@@ -38,10 +37,17 @@ You may need to `pip install requests`
 
     python python-req.py
 
-### Flask
+## How to run the Demos
+
+### Flask Demo
 cd into the folder where the file is and do this in your terminal:
 You may need to `pip install requests` and `pip install flask`
 
-    python flask-app-ex.py
+    export FLASK_APP=app.py
+    flask run
+
+
+### HTML/CSS/JavaScript Demo
+Open it the same way you would open the JavaScript request-example.
 
 
