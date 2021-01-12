@@ -13,7 +13,7 @@ let request = new XMLHttpRequest();
         }
     };
 
-// JQuery API Request
+// Ajax API Request
 // Good choice for JavaScript projects
 $.ajax({
   url: "https://catfact.ninja/fact",
